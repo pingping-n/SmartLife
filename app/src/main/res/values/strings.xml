@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Smart Life</string>
+    <string name="title_home">Home</string>
+    <string name="title_mydevice">My Device</string>
+    <string name="title_Setting">Setting</string>
+    <string name="title_help">Help</string>
+    <string name="username_title">Username</string>
+    <string name="password_title">Password</string>
+    <string name="button_login">Login</string>
+    <string name="login_error_message">Username or Password is incorrect.</string>
+    <string name="logoscreen">logoscreen</string>
+</resources>

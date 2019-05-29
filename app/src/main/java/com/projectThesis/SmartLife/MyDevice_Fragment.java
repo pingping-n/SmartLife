@@ -1,6 +1,7 @@
 package com.projectThesis.SmartLife;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -106,6 +107,10 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Toast.makeText(getActivity(), product_viewList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(getActivity(), ShowDataDevice.class);
+            startActivity(intent);
+
         }
     };
 

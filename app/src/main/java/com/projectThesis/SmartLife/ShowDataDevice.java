@@ -1,8 +1,10 @@
 package com.projectThesis.SmartLife;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -47,9 +49,18 @@ public class ShowDataDevice extends AppCompatActivity {
         v4 = (TextView) findViewById(R.id.textView10);
         v5 = (TextView) findViewById(R.id.textView11);
 
+        final Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                setShowDataAPI();
+                Toast.makeText(getApplicationContext(), "refresh", Toast.LENGTH_SHORT).show();
+                handler.postDelayed(this, 1000);
+            }
+        }; handler.postDelayed(runnable, 1000);
         show = (TextView) findViewById(R.id.textView12);
 //        getShowDataAPI(url);
-        setShowDataAPI();
+
 
     }
 

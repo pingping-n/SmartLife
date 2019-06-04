@@ -63,49 +63,6 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
                     }
                 });
 
-        //creating a request queue
-        //       RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        //adding the string request to request queue
-        //     requestQueue.add(stringRequest);
-
-
-//        try {
-//            URL url = new URL(this.url);
-//
-//            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-//            InputStream inputStream = httpURLConnection.getInputStream();
-//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-//            String line = "";
-//            while (line != null) {
-//                line = bufferedReader.readLine();
-//                data = data + line;
-//
-//                System.out.println(data);
-//            }
-//
-//            JSONArray JA = new JSONArray(data);
-//            for (int i = JA.length()-1; i < JA.length(); i++) {
-//                JO = (JSONObject) JA.get(i);
-//                singleParsed =  "v1:" + JO.get("v1") + "\n"+
-//                        "v2:" + JO.get("v2") + "\n"+
-//                        "v3:" + JO.get("v3") + "\n"+
-//                        "v4:" + JO.get("v4") + "\n"+
-//                        "v5:" + JO.get("v5") + "\n";
-//
-//                dataParsed = dataParsed + singleParsed +"\n" ;
-//
-//            }
-//
-//
-//        } catch(MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch(IOException e) {
-//            e.printStackTrace();
-//        } catch(JSONException e) {
-//            e.printStackTrace();
-//        }
-//
         return null;
     }
 

@@ -54,7 +54,7 @@ public class ShowDataDevice extends AppCompatActivity {
             @Override
             public void run() {
                 setShowDataAPI();
-                Toast.makeText(getApplicationContext(), "refresh", Toast.LENGTH_SHORT).show();
+               //Toast.makeText(getApplicationContext(), "refresh", Toast.LENGTH_SHORT).show();
                 handler.postDelayed(this, 1000);
             }
         }; handler.postDelayed(runnable, 1000);

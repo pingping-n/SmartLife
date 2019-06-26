@@ -10,6 +10,7 @@
         <item name="android:textColorHint">@color/colorPrimary</item>
 
         <item name="android:fontFamily">@font/multicolore</item>
+
     </style>
 
     <!--Main screen Theme-->
@@ -24,6 +25,7 @@
     <!--Splash Theme-->
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen</item>
+
     </style>
 
     <!--Login Theme-->
@@ -35,6 +37,7 @@
         <item name="android:textColorHint">@color/colorPrimary</item>
 
         <item name="android:fontFamily">@font/multicolore</item>
+
     </style>
 
     <style name="NavigationView" >

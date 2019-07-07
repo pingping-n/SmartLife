@@ -9,10 +9,12 @@
 
     <Switch
         android:id="@+id/switch_view"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:track="@drawable/switch_track_custom"
+        android:thumb="@drawable/switch_thumb_custom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,7 +22,7 @@
         android:id="@+id/stub_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="55dp"
         android:inflatedId="@+id/stub_list"
         android:layout="@layout/my_listview"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +32,7 @@
         android:id="@+id/stub_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="55dp"
         android:inflatedId="@+id/stub_grid"
         android:layout="@layout/my_gridview"
         app:layout_constraintEnd_toEndOf="parent"

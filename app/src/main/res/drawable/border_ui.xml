@@ -4,6 +4,7 @@
     <!-- <solid android:color="#00000000" /> -->
     <!-- use this for a background colour -->
     <solid android:color="#FFFFFF" />
+
     <stroke android:width="1dip"
         android:color="#FCD824" />
     <corners android:radius="12dp" />

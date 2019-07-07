@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="center_vertical|fill_horizontal" android:drawable="@drawable/ic_controls">
+        <shape
+            android:shape="rectangle"
+            android:visible="true"
+            android:dither="true"
+            android:useLevel="false">
+            <solid android:color="#FFFFFF" />
+            <stroke android:width="1dip"
+                android:color="#FCD824" />
+            <corners android:radius="12dp" />
+            <size android:height="40dp"
+                android:width="60dp" />
+        </shape>
+    </item>
+</layer-list>

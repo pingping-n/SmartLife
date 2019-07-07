@@ -16,6 +16,6 @@
         android:layout_marginRight="20dp"
         android:numColumns="2"
         android:stretchMode="spacingWidth"
-        android:verticalSpacing="20dp"
+        android:verticalSpacing="10dp"
         android:visibility="visible"/>
 </FrameLayout>

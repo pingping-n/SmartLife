@@ -38,6 +38,9 @@ public class ShowDataDevice extends AppCompatActivity {
     private String vt4;
     private String vt5;
 
+    private Handler handler;
+    private Runnable runnable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +52,8 @@ public class ShowDataDevice extends AppCompatActivity {
         v4 = (TextView) findViewById(R.id.textView10);
         v5 = (TextView) findViewById(R.id.textView11);
 
-        final Handler handler = new Handler();
-        Runnable runnable = new Runnable() {
+        handler = new Handler();
+        runnable = new Runnable() {
             @Override
             public void run() {
                 setShowDataAPI();
@@ -60,7 +63,6 @@ public class ShowDataDevice extends AppCompatActivity {
         }; handler.postDelayed(runnable, 1000);
         show = (TextView) findViewById(R.id.textView12);
 //        getShowDataAPI(url);
-
 
     }
 
@@ -129,4 +131,25 @@ public class ShowDataDevice extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        handler.removeCallbacks(runnable);
+        finish();
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        handler.removeCallbacks(runnable);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        handler.postDelayed(runnable, 1000);
+        super.onResume();
+    }
+
 }

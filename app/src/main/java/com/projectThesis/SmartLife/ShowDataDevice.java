@@ -67,7 +67,7 @@ public class ShowDataDevice extends AppCompatActivity {
     }
 
 //    private void getShowDataAPI(String url) {
-//        fetchData process = new fetchData(url);
+//        FetchData_ItemData process = new FetchData_ItemData(url);
 //        process.execute();
 //    }
 

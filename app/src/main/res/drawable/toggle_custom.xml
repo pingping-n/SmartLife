@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="false" android:drawable="@drawable/ic_box1">
+        <!--<scale android:scaleHeight="40dp"-->
+            <!--android:scaleWidth="40dp"/>-->
+        <!--<shape-->
+            <!--android:shape="rectangle"-->
+            <!--android:visible="true"-->
+            <!--android:dither="true"-->
+            <!--android:useLevel="false">-->
+            <!--&lt;!&ndash;<solid android:color="#000000" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<gradient&ndash;&gt;-->
+                <!--&lt;!&ndash;android:startColor="#66AAFF00"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:endColor="#6600FF00"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:angle="270"/>&ndash;&gt;-->
+            <!--<corners-->
+                <!--android:radius="13dp"/>-->
+            <!--<size-->
+                <!--android:width="37dp"-->
+                <!--android:height="37dp" />-->
+        <!--</shape>-->
+    </item>
+    <item android:state_checked="true" android:drawable="@drawable/ic_box2" >
+        <!--<scale android:scaleHeight="40dp"-->
+            <!--android:scaleWidth="40dp"/>-->
+        <!--<shape-->
+            <!--android:shape="rectangle"-->
+            <!--android:visible="true"-->
+            <!--android:dither="true"-->
+            <!--android:useLevel="false">-->
+            <!--&lt;!&ndash;<solid android:color="#000000" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<gradient&ndash;&gt;-->
+                <!--&lt;!&ndash;android:startColor="#ff0000"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:endColor="#ff0000"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:angle="270" />&ndash;&gt;-->
+            <!--<corners-->
+                <!--android:radius="13dp"/>-->
+            <!--<size-->
+                <!--android:width="37dp"-->
+                <!--android:height="37dp" />-->
+        <!--</shape>-->
+    </item>
+</selector>

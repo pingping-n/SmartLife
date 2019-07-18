@@ -14,7 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class fetchData extends AsyncTask<Void, Void, Void> {
+public class FetchData_ItemData extends AsyncTask<Void, Void, Void> {
 
     private String url;
     private String data;
@@ -23,7 +23,7 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
 
     private JSONObject JO;
 
-    public fetchData(String url) {
+    public FetchData_ItemData(String url) {
         this.url = url;
     }
 

@@ -15,17 +15,18 @@ import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MyDevice_Fragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
 
     static final int VIEW_MODE_LISTVIEW = 0;
     static final int VIEW_MODE_GRIDVIEW = 1;
-    private Switch switch_view;
+    private ToggleButton switch_view;
     private ViewStub stubGrid;
     private ViewStub stubList;
     private ListView listView;
@@ -33,6 +34,8 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
     private ListViewAdapter listViewAdaptert;
     private GridViewAdapter gridViewAdapter;
     private List<Product_View> product_viewList;
+
+    private SharedPreferences sharedPreferences;
 
     private int currentViewMode = 0;
 
@@ -52,7 +55,7 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
 
         stubList = (ViewStub) getActivity().findViewById(R.id.stub_list);
         stubGrid = (ViewStub) getActivity().findViewById(R.id.stub_grid);
-        switch_view = (Switch) getActivity().findViewById(R.id.switch_view);
+        switch_view = (ToggleButton) getActivity().findViewById(R.id.switch_view);
 
         switch_view.setOnCheckedChangeListener(this);
 
@@ -64,8 +67,13 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
 
         getProductList();
 
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("ViewMode", Context.MODE_PRIVATE);
+        sharedPreferences = this.getActivity().getSharedPreferences("ViewMode", Context.MODE_PRIVATE);
         currentViewMode = sharedPreferences.getInt("currentViewMode", VIEW_MODE_LISTVIEW);
+        if (currentViewMode == 0) {
+            switch_view.setChecked(false);
+        } else {
+            switch_view.setChecked(true);
+        }
 
         listView.setOnItemClickListener(onItemClick);
         gridView.setOnItemClickListener(onItemClick);
@@ -94,26 +102,6 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
         }
     }
 
-    private List<Product_View> getProductList() {
-        product_viewList = new ArrayList<>();
-        product_viewList.add(new Product_View(R.drawable.ic_login, "Title 1"));
-        product_viewList.add(new Product_View(R.drawable.ic_login, "Title 2"));
-        product_viewList.add(new Product_View(R.drawable.ic_login, "Title 3"));
-        return product_viewList;
-    }
-
-    // On click item
-    AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Toast.makeText(getActivity(), product_viewList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
-
-            Intent intent = new Intent(getActivity(), ShowDataDevice.class);
-            startActivity(intent);
-
-        }
-    };
-
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
@@ -125,10 +113,32 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
         }
 
         switchView();
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("ViewMode", Context.MODE_PRIVATE);
+        sharedPreferences = this.getActivity().getSharedPreferences("ViewMode", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("currentViewMode", currentViewMode);
         editor.commit();
     }
+
+    // Show list item
+    private List<Product_View> getProductList() {
+        product_viewList = new ArrayList<>();
+        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 1"));
+        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 2"));
+        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
+        return product_viewList;
+    }
+
+    // On click item
+    AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            //Toast.makeText(getActivity(), product_viewList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(getActivity(), ShowDataDevice.class);
+            startActivity(intent);
+
+        }
+    };
+
 
 }

@@ -125,6 +125,19 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
         product_viewList.add(new Product_View(R.drawable.ic_info, "Title 1"));
         product_viewList.add(new Product_View(R.drawable.ic_info, "Title 2"));
         product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
+        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
+        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
+        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
+        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
+        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
+        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
+        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
+        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
+        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
+        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
+        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
+        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
+
         return product_viewList;
     }
 

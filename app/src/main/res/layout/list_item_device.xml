@@ -7,27 +7,29 @@
     android:paddingRight="10dp"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
-    android:background="@drawable/border_ui"
+    android:background="@drawable/selector_list"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/textId"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="2dp"
+        android:fontFamily="@font/multicolore"
         android:text="@string/title_myDevice"
-
+        android:textColor="#343C39"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textTitle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textId"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="2dp"
+        android:textColor="#343C39"
         android:text="@string/title_myDevice"
-
         android:textSize="20sp" />
 
 </RelativeLayout>

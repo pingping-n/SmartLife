@@ -26,11 +26,12 @@ public class ListViewAdapter_AddDevice extends ArrayAdapter<Device_View> {
             LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.list_item_device, null);
         }
+
         Device_View device_view = getItem(position);
         TextView textId = (TextView) v.findViewById(R.id.textId);
         TextView textTitle = (TextView) v.findViewById(R.id.textTitle);
 
-        textId.setText(device_view.getDeviceId());
+        textId.setText(String.valueOf(device_view.getDeviceId()));
         textTitle.setText(device_view.getTitle());
 
 

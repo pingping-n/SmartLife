@@ -122,17 +122,21 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
     // Show list item
     private List<MyDevice_View> getProductList() {
         myDevice_viewList = new ArrayList<>();
-        myDevice_viewList.add(new MyDevice_View("11", R.drawable.ic_info, "Title 11"));
-        myDevice_viewList.add(new MyDevice_View("12", R.drawable.ic_info, "Title 12"));
-        myDevice_viewList.add(new MyDevice_View("13", R.drawable.ic_info, "Title 13"));
+//        myDevice_viewList.add(new MyDevice_View("11", R.drawable.ic_info, "Title 11"));
+//        myDevice_viewList.add(new MyDevice_View("12", R.drawable.ic_info, "Title 12"));
+//        myDevice_viewList.add(new MyDevice_View("13", R.drawable.ic_info, "Title 13"));
 
         Cursor data = databaseHelper_device.getData();
-        while(data.moveToNext()) {
-            String x1 = data.getString(1);
-            int x2 = Integer.valueOf(data.getString(2));
-            String x3 = data.getString(3);
+        if(data != null) {
+            if (data.moveToFirst()) {
+                do {
+                    String x1 = data.getString(1);
+                    String x2 = data.getString(2);
+                    String x3 = data.getString(3);
 
-            myDevice_viewList.add(new MyDevice_View(x1, R.drawable.ic_info, x3));
+                    myDevice_viewList.add(new MyDevice_View(x1, R.drawable.ic_info, x3));
+                } while (data.moveToNext());
+            }
         }
 
         return myDevice_viewList;

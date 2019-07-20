@@ -18,7 +18,7 @@ public class AddDeviceDetailActivity extends AppCompatActivity implements View.O
     private Intent intent;
 
     private String id_device;
-    private int imageId;
+    private String imageId;
     private String title;
 
     DatabaseHelper_Device mDatabaseHelper_device;
@@ -37,7 +37,7 @@ public class AddDeviceDetailActivity extends AppCompatActivity implements View.O
         intent = getIntent();
         id_device = intent.getStringExtra("id_device");
 
-        imageId = R.drawable.ic_info;
+        imageId = "testtext";
 
         add_device_end.setOnClickListener(this);
         editText_title.addTextChangedListener(this);
@@ -48,7 +48,7 @@ public class AddDeviceDetailActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         title = editText_title.getText().toString();
         if (editText_title.length() != 0) {
-            AddData(id_device, 1, title);
+            AddData(id_device, imageId, title);
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
 
@@ -73,7 +73,7 @@ public class AddDeviceDetailActivity extends AppCompatActivity implements View.O
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        boolean isReady = editText_title.getText().toString().length() > 3;
+        boolean isReady = editText_title.getText().toString().length() > 2;
         add_device_end.setEnabled(isReady);
     }
 

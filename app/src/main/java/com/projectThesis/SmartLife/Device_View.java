@@ -3,18 +3,18 @@ package com.projectThesis.SmartLife;
 public class Device_View {
 
     private String title;
-    private int deviceId;
+    private String deviceId;
 
-    public Device_View(int deviceId, String title) {
+    public Device_View(String deviceId, String title) {
         this.deviceId = deviceId;
         this.title = title;
     }
 
-    public int getDeviceId() {
+    public String getDeviceId() {
         return deviceId;
     }
 
-    public void setDeviceId(int deviceId) {
+    public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
     }
 

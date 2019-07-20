@@ -1,13 +1,23 @@
 package com.projectThesis.SmartLife;
 
-public class Product_View {
+public class MyDevice_View {
 
+    private String id_device;
     private int imageId;
     private String title;
 
-    public Product_View(int imageId, String title) {
+    public MyDevice_View(String id_device, int imageId, String title) {
+        this.id_device = id_device;
         this.imageId = imageId;
         this.title = title;
+    }
+
+    public String getId_device() {
+        return id_device;
+    }
+
+    public void setId_device(String id_device) {
+        this.id_device = id_device;
     }
 
     public int getImageId() {

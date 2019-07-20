@@ -3,6 +3,7 @@ package com.projectThesis.SmartLife;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
@@ -26,6 +26,7 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
 
     static final int VIEW_MODE_LISTVIEW = 0;
     static final int VIEW_MODE_GRIDVIEW = 1;
+    DatabaseHelper_Device databaseHelper_device;
     private ToggleButton switch_view;
     private ViewStub stubGrid;
     private ViewStub stubList;
@@ -33,10 +34,8 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
     private GridView gridView;
     private ListViewAdapter listViewAdaptert;
     private GridViewAdapter gridViewAdapter;
-    private List<Product_View> product_viewList;
-
+    private List<MyDevice_View> myDevice_viewList;
     private SharedPreferences sharedPreferences;
-
     private int currentViewMode = 0;
 
     @Nullable
@@ -52,6 +51,7 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        databaseHelper_device = new DatabaseHelper_Device(getActivity());
 
         stubList = (ViewStub) getActivity().findViewById(R.id.stub_list);
         stubGrid = (ViewStub) getActivity().findViewById(R.id.stub_grid);
@@ -94,17 +94,17 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
 
     private void setAdapters() {
         if (VIEW_MODE_LISTVIEW == currentViewMode) {
-            listViewAdaptert = new ListViewAdapter(getContext(), R.layout.list_item, product_viewList);
+            listViewAdaptert = new ListViewAdapter(getContext(), R.layout.list_item, myDevice_viewList);
             listView.setAdapter(listViewAdaptert);
         } else {
-            gridViewAdapter = new GridViewAdapter(getContext(), R.layout.grid_item, product_viewList);
+            gridViewAdapter = new GridViewAdapter(getContext(), R.layout.grid_item, myDevice_viewList);
             gridView.setAdapter(gridViewAdapter);
         }
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked) {
+        if(isChecked) {
             // The toggle is enabled
             currentViewMode = VIEW_MODE_GRIDVIEW;
         } else {
@@ -120,32 +120,29 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
     }
 
     // Show list item
-    private List<Product_View> getProductList() {
-        product_viewList = new ArrayList<>();
-        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 1"));
-        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 2"));
-        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
-        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
-        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
-        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
-        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
-        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
-        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
-        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
-        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
-        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
-        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
-        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
-        product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));product_viewList.add(new Product_View(R.drawable.ic_info, "Title 3"));
+    private List<MyDevice_View> getProductList() {
+        myDevice_viewList = new ArrayList<>();
+        myDevice_viewList.add(new MyDevice_View("11", R.drawable.ic_info, "Title 11"));
+        myDevice_viewList.add(new MyDevice_View("12", R.drawable.ic_info, "Title 12"));
+        myDevice_viewList.add(new MyDevice_View("13", R.drawable.ic_info, "Title 13"));
 
-        return product_viewList;
+        Cursor data = databaseHelper_device.getData();
+        while(data.moveToNext()) {
+            String x1 = data.getString(1);
+            int x2 = Integer.valueOf(data.getString(2));
+            String x3 = data.getString(3);
+
+            myDevice_viewList.add(new MyDevice_View(x1, R.drawable.ic_info, x3));
+        }
+
+        return myDevice_viewList;
     }
 
     // On click item
     AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            //Toast.makeText(getActivity(), product_viewList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), myDevice_viewList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(getActivity(), ShowDataDevice.class);
             startActivity(intent);

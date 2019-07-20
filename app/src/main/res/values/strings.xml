@@ -10,4 +10,5 @@
     <string name="login_error_message">Username or Password is incorrect.</string>
     <string name="add_device">+ ADD DEVICE</string>
     <string name="image_view_item">image view item</string>
+    <string name="next">NEXT</string>
 </resources>

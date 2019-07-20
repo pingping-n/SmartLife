@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         //First navigation selected
         navigation.getMenu().getItem(0).setChecked(true);
-
+        onNavigationItemSelected(navigation.getMenu().getItem(0));
         loadFragment(new Home_Fragment());
     }
 

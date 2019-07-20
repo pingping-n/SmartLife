@@ -28,8 +28,8 @@ public class ListViewAdapter_AddDevice extends ArrayAdapter<Device_View> {
         }
 
         Device_View device_view = getItem(position);
-        TextView textId = (TextView) v.findViewById(R.id.textId);
-        TextView textTitle = (TextView) v.findViewById(R.id.textTitle);
+        TextView textId = (TextView) v.findViewById(R.id.textId_AddDevice);
+        TextView textTitle = (TextView) v.findViewById(R.id.textTitle_AddDevice);
 
         textId.setText(String.valueOf(device_view.getDeviceId()));
         textTitle.setText(device_view.getTitle());

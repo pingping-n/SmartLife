@@ -8,9 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper_Device extends SQLiteOpenHelper {
 
-    private static final String TABLE_NAME = "device_table";
+    private static final String TABLE_NAME = "myDevices_table";
     private static final String COL1 = "ID";
-    private static final String COL2 = "name";
+    private static final String COL2 = "id_device";
+    private static final String COL3 = "imageId";
+    private static final String COL4 = "title";
 
     public DatabaseHelper_Device(Context context) {
         super(context, TABLE_NAME, null, 1);
@@ -19,7 +21,9 @@ public class DatabaseHelper_Device extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL2 +" TEXT)";
+                COL2 + " TEXT," +
+                COL3 + " TEXT," +
+                COL4 + " TEXT)";
         db.execSQL(createTable);
     }
 
@@ -29,17 +33,21 @@ public class DatabaseHelper_Device extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addData(String item) {
+    public boolean addData(String id_device, String imageId, String title) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL2, item);
+        contentValues.put(COL2, id_device);
+        contentValues.put(COL3, imageId);
+        contentValues.put(COL4, title);
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 
         //if date as inserted incorrectly it will return -1
         if (result == -1) {
+            db.close();
             return false;
         } else {
+            db.close();
             return true;
         }
     }
@@ -49,21 +57,22 @@ public class DatabaseHelper_Device extends SQLiteOpenHelper {
      * @return
      */
     public Cursor getData(){
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME;
         Cursor data = db.rawQuery(query, null);
+
         return data;
     }
 
     /**
      * Returns only the ID that matches the name passed in
-     * @param name
+     * @param id_device
      * @return
      */
-    public Cursor getItemID(String name){
-        SQLiteDatabase db = this.getWritableDatabase();
+    public Cursor getItemID(String id_device){
+        SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT " + COL1 + " FROM " + TABLE_NAME +
-                " WHERE " + COL2 + " = '" + name + "'";
+                " WHERE " + COL2 + " = '" + id_device + "'";
         Cursor data = db.rawQuery(query, null);
         return data;
     }

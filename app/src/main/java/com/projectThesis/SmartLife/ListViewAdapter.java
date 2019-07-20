@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class ListViewAdapter extends ArrayAdapter<Product_View> {
+public class ListViewAdapter extends ArrayAdapter<MyDevice_View> {
 
-    public ListViewAdapter(Context context, int resource, List<Product_View> objects) {
+    public ListViewAdapter(Context context, int resource, List<MyDevice_View> objects) {
         super(context, resource, objects);
     }
 
@@ -26,10 +26,10 @@ public class ListViewAdapter extends ArrayAdapter<Product_View> {
             LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.list_item, null);
         }
-        Product_View product_view = getItem(position);
+        MyDevice_View myDevice_view = getItem(position);
         TextView textTitle = (TextView) v.findViewById(R.id.textTitle);
 
-        textTitle.setText(product_view.getTitle());
+        textTitle.setText(myDevice_view.getTitle());
 
         return v;
     }

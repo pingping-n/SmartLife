@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class GridViewAdapter extends ArrayAdapter<Product_View> {
+public class GridViewAdapter extends ArrayAdapter<MyDevice_View> {
 
-    public GridViewAdapter(Context context, int resource, List<Product_View> objects) {
+    public GridViewAdapter(Context context, int resource, List<MyDevice_View> objects) {
         super(context, resource, objects);
     }
 
@@ -26,12 +26,12 @@ public class GridViewAdapter extends ArrayAdapter<Product_View> {
             LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.grid_item, null);
         }
-        Product_View product_view = getItem(position);
+        MyDevice_View myDevice_view = getItem(position);
         ImageView img = (ImageView) v.findViewById(R.id.imageView);
         TextView textTitle = (TextView) v.findViewById(R.id.textTitle);
 
-        img.setImageResource(product_view.getImageId());
-        textTitle.setText(product_view.getTitle());
+        img.setImageResource(myDevice_view.getImageId());
+        textTitle.setText(myDevice_view.getTitle());
 
         return v;
     }

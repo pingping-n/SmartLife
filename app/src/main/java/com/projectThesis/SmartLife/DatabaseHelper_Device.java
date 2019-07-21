@@ -69,7 +69,6 @@ public class DatabaseHelper_Device extends SQLiteOpenHelper {
 
     /**
      * Returns only the ID that matches the name passed in
-     * @param id_device
      * @return
      */
     public Cursor getItemIdDevice(String id_device){
@@ -83,10 +82,10 @@ public class DatabaseHelper_Device extends SQLiteOpenHelper {
 //    /**
 //     * Updates the name field
 //     * @param newName
-//     * @param id
+//     * @param id_device
 //     * @param oldName
 //     */
-//    public void updateName(String newName, int id, String oldName){
+//    public void updateName(String newName, String id_device, String oldName){
 //        SQLiteDatabase db = this.getWritableDatabase();
 //        String query = "UPDATE " + TABLE_NAME + " SET " + COL2 +
 //                " = '" + newName + "' WHERE " + COL1 + " = '" + id + "'" +
@@ -96,8 +95,6 @@ public class DatabaseHelper_Device extends SQLiteOpenHelper {
 
     /**
      * Delete from database
-     * @param id_device
-     * @param title
      */
     public void deleteName(String id_device, String title){
         SQLiteDatabase db = this.getWritableDatabase();

@@ -65,7 +65,7 @@ public class AddDeviceActivity extends AppCompatActivity implements View.OnClick
             view.setSelected(true);
             id_device = device_viewList.get(position).getDeviceId();
             add_device.setEnabled(true);
-            Toast.makeText(getApplicationContext(), "Select : " + id_device, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Select : " + id_device, Toast.LENGTH_SHORT).show();
 
         }
     };

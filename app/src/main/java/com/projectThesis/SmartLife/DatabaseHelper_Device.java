@@ -67,19 +67,19 @@ public class DatabaseHelper_Device extends SQLiteOpenHelper {
         return data;
     }
 
-//    /**
-//     * Returns only the ID that matches the name passed in
-//     * @param id_device
-//     * @return
-//     */
-//    public Cursor getItemID(String id_device){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        String query = "SELECT " + COL1 + " FROM " + TABLE_NAME +
-//                " WHERE " + COL2 + " = '" + id_device + "'";
-//        Cursor data = db.rawQuery(query, null);
-//        return data;
-//    }
-//
+    /**
+     * Returns only the ID that matches the name passed in
+     * @param id_device
+     * @return
+     */
+    public Cursor getItemIdDevice(String id_device){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL2 + ", "+ COL3 + " FROM " + TABLE_NAME +
+                " WHERE " + COL2 + " = '" + id_device + "'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
 //    /**
 //     * Updates the name field
 //     * @param newName
@@ -93,19 +93,19 @@ public class DatabaseHelper_Device extends SQLiteOpenHelper {
 //                " AND " + COL2 + " = '" + oldName + "'";
 //        db.execSQL(query);
 //    }
-//
-//    /**
-//     * Delete from database
-//     * @param id
-//     * @param name
-//     */
-//    public void deleteName(int id, String name){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        String query = "DELETE FROM " + TABLE_NAME + " WHERE "
-//                + COL1 + " = '" + id + "'" +
-//                " AND " + COL2 + " = '" + name + "'";
-//        db.execSQL(query);
-//    }
+
+    /**
+     * Delete from database
+     * @param id_device
+     * @param title
+     */
+    public void deleteName(String id_device, String title){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE "
+                + COL2 + " = '" + id_device + "'" +
+                " AND " + COL4 + " = '" + title + "'";
+        db.execSQL(query);
+    }
 
 
 }

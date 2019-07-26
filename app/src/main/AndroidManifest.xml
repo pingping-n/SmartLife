@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".AddDeviceDetailActivity"></activity>
+
         <activity
             android:name=".SplashScreenActivity"
             android:screenOrientation="portrait"
@@ -39,6 +39,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".AddDeviceActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".AddDeviceDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".AddDeviceDataActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".AddDeviceDataDetailActivity"
             android:screenOrientation="portrait" />
     </application>
 

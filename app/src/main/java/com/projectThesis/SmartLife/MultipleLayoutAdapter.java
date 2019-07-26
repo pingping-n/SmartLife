@@ -1,6 +1,7 @@
 package com.projectThesis.SmartLife;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,7 +77,7 @@ public class MultipleLayoutAdapter extends BaseAdapter {
         else {
             viewHolder = (MeterViewHolder) convertView.getTag();
         }
-
+        viewHolder.meter.animate();
         viewHolder.meter.setMaxValue(100);
         viewHolder.meter.setValue(Float.parseFloat(item.getData()));
 
@@ -93,8 +94,13 @@ public class MultipleLayoutAdapter extends BaseAdapter {
         else {
             viewHolder = (ProgressBarViewHolder) convertView.getTag();
         }
+        viewHolder.progressBar.setProgressBackground(Color.GRAY);
+        viewHolder.progressBar.setProgressColor(Color.rgb(252,216,66));
+        viewHolder.progressBar.withAnimation(1);
         viewHolder.progressBar.setMaxValue(100);
         viewHolder.progressBar.setProgressValue(Float.parseFloat(item.getData()));
+        viewHolder.progressBar.setProgressText(item.getData());
+
 
         return convertView;
     }

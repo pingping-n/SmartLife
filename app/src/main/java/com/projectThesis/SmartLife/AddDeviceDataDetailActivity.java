@@ -1,0 +1,114 @@
+package com.projectThesis.SmartLife;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.lang.String;
+
+public class AddDeviceDataDetailActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private Button add_device_end;
+    private ListView listView;
+
+    DatabaseHelper_Device_Data mDatabaseHelper_device_data;
+
+    private Intent intent;
+
+    private List items;
+    private String id_device;
+    private String v_device;
+    private String v1 = "0";
+    private String v2 = "0";
+    private String v3 = "0";
+    private String v4 = "0";
+    private String v5 = "0";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_show_list_device);
+        setTitle("select layout");
+        add_device_end = (Button) findViewById(R.id.button_add_device_selected);
+        listView = (ListView) findViewById(R.id.my_ListView_Device);
+
+        intent = getIntent();
+        id_device = intent.getStringExtra("id_device");
+        v_device = intent.getStringExtra("v_device");
+
+        mDatabaseHelper_device_data = new DatabaseHelper_Device_Data(this);
+
+        items = new ArrayList<>();
+        items.add(new CustomList_Device_Data("50.0", 1));
+        items.add(new CustomList_Device_Data("50.0", 2));
+
+        MultipleLayoutAdapter adapter = new MultipleLayoutAdapter(this, items);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(onClickItemListener);
+
+        add_device_end.setText("Done");
+        add_device_end.setOnClickListener(this);
+        add_device_end.setEnabled(false);
+
+
+    }
+
+    AdapterView.OnItemClickListener onClickItemListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            view.setSelected(true);
+            setLayoutData(v_device, position + 1);
+            add_device_end.setEnabled(true);
+            Toast.makeText(getApplicationContext(), "Select Type : " + position + 1, Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    public void setLayoutData(String temp, int position) {
+        if (temp.equals("v1"))
+        {
+            v1 = String.valueOf(position);
+            v2 = v3 = v4 = v5 = "0";
+        } else if(temp.equals("v2")) {
+            v2 = String.valueOf(position);
+            v1 = v3 = v4 = v5 = "0";
+        } else if (temp.equals("v3")) {
+            v3 = String.valueOf(position);
+            v1 = v2 = v4 = v5 = "0";
+        } else if (temp.equals("v4")) {
+            v4 = String.valueOf(position);
+            v1 = v2 = v3 = v5 = "0";
+        } else if(temp.equals("v5")) {
+            v5 = String.valueOf(position);
+            v1 = v2 = v3 = v4 = "0";
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        AddData(id_device, v1, v2, v3, v4, v5);
+        Intent intent = new Intent(this, ShowDataDevice.class);
+        startActivity(intent);
+    }
+
+    public void AddData(String id_device, String v1, String v2, String v3, String v4, String v5) {
+        boolean insertData = mDatabaseHelper_device_data.addData(id_device, v1, v2, v3, v4, v5);
+
+        if (insertData) {
+            toastMessage("Data Successfully Inserted!");
+        } else {
+            toastMessage("Something went wrong");
+        }
+    }
+
+    private void toastMessage(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+    }
+
+}

@@ -154,6 +154,7 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
             //Toast.makeText(getActivity(), myDevice_viewList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(getActivity(), ShowDataDevice.class);
+            intent.putExtra("id_device", myDevice_viewList.get(position).getId_device());
             startActivity(intent);
 
         }

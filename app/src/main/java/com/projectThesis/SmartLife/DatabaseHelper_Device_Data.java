@@ -1,5 +1,6 @@
 package com.projectThesis.SmartLife;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -39,6 +40,65 @@ public class DatabaseHelper_Device_Data extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
+
+    public boolean addData(String id_device, String v1, String v2, String v3, String v4, String v5) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL2, id_device);
+        contentValues.put(COL3, v1);
+        contentValues.put(COL4, v2);
+        contentValues.put(COL5, v3);
+        contentValues.put(COL6, v4);
+        contentValues.put(COL7, v5);
+
+        long result = db.insert(TABLE_NAME, null, contentValues);
+
+        //if date as inserted incorrectly it will return -1
+        if (result == -1) {
+            db.close();
+            return false;
+        } else {
+            db.close();
+            return true;
+        }
+    }
+
+    public Cursor getTypeV1(String id_device){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL3 + " FROM " + TABLE_NAME +
+                " WHERE " + COL2 + " = '" + id_device +"'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+    public Cursor getTypeV2(String id_device){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL4 + " FROM " + TABLE_NAME +
+                " WHERE " + COL2 + " = '" + id_device +"'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+    public Cursor getTypeV3(String id_device){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL5 + " FROM " + TABLE_NAME +
+                " WHERE " + COL2 + " = '" + id_device +"'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+    public Cursor getTypeV4(String id_device){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL6 + " FROM " + TABLE_NAME +
+                " WHERE " + COL2 + " = '" + id_device +"'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+    public Cursor getTypeV5(String id_device){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL7 + " FROM " + TABLE_NAME +
+                " WHERE " + COL2 + " = '" + id_device +"'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
 
     /**
      * Returns all the data from database

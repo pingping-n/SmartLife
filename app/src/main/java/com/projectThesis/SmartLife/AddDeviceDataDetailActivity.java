@@ -66,7 +66,7 @@ public class AddDeviceDataDetailActivity extends AppCompatActivity implements Vi
             view.setSelected(true);
             setLayoutData(v_device, position + 1);
             add_device_end.setEnabled(true);
-            Toast.makeText(getApplicationContext(), "Select Type : " + position + 1, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Select Type : " + (position + 1), Toast.LENGTH_SHORT).show();
         }
     };
 

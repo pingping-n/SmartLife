@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
+
 import com.app.infideap.stylishwidget.view.*;
 
 
@@ -53,6 +55,7 @@ public class MultipleLayoutAdapter extends BaseAdapter {
         int viewType = getItemViewType(position);
         switch (viewType) {
             case CustomList_Device_Data.TYPE_NONE:
+                convertView = inflateNull(convertView, parent, item);
                 break;
 
             case CustomList_Device_Data.TYPE_PROGRESSBAR:
@@ -67,6 +70,20 @@ public class MultipleLayoutAdapter extends BaseAdapter {
 
     }
 
+    private View inflateNull(View convertView, ViewGroup parent, CustomList_Device_Data item) {
+        NullViewHolder viewHolder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.layout_data_null, parent, false);
+            viewHolder = new NullViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        }
+        else {
+            viewHolder = (NullViewHolder) convertView.getTag();
+        }
+
+        return convertView;
+    }
+
     private View inflateMeter(View convertView, ViewGroup parent, CustomList_Device_Data item) {
         MeterViewHolder viewHolder;
         if (convertView == null) {
@@ -79,6 +96,9 @@ public class MultipleLayoutAdapter extends BaseAdapter {
         }
         viewHolder.meter.animate();
         viewHolder.meter.setMaxValue(100);
+        if (Float.parseFloat(item.getData()) > 100) {
+            viewHolder.meter.setMaxValue(Float.parseFloat(item.getData()) + 50);
+        }
         viewHolder.meter.setValue(Float.parseFloat(item.getData()));
 
         return convertView;
@@ -98,11 +118,22 @@ public class MultipleLayoutAdapter extends BaseAdapter {
         viewHolder.progressBar.setProgressColor(Color.rgb(252,216,66));
         viewHolder.progressBar.withAnimation(1);
         viewHolder.progressBar.setMaxValue(100);
+        if (Float.parseFloat(item.getData()) > 100) {
+            viewHolder.progressBar.setMaxValue(Float.parseFloat(item.getData()) + 50);
+        }
         viewHolder.progressBar.setProgressValue(Float.parseFloat(item.getData()));
         viewHolder.progressBar.setProgressText(item.getData());
 
 
         return convertView;
+    }
+
+    static class NullViewHolder {
+        private TextView textView;
+
+        public NullViewHolder(View view) {
+            this.textView = (TextView) view.findViewById(R.id.nulltext);
+        }
     }
 
     static class MeterViewHolder {
@@ -111,7 +142,6 @@ public class MultipleLayoutAdapter extends BaseAdapter {
         public MeterViewHolder(View view) {
             this.meter = (AMeter) view.findViewById(R.id.meter);
         }
-
     }
 
     static class ProgressBarViewHolder {

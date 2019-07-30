@@ -63,42 +63,38 @@ public class DatabaseHelper_Device_Data extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor getTypeV1(String id_device){
+    public boolean updateName(String id_device, String v1, String v2, String v3, String v4, String v5){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + COL3 + " FROM " + TABLE_NAME +
-                " WHERE " + COL2 + " = '" + id_device +"'";
-        Cursor data = db.rawQuery(query, null);
-        return data;
-    }
-    public Cursor getTypeV2(String id_device){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + COL4 + " FROM " + TABLE_NAME +
-                " WHERE " + COL2 + " = '" + id_device +"'";
-        Cursor data = db.rawQuery(query, null);
-        return data;
-    }
-    public Cursor getTypeV3(String id_device){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + COL5 + " FROM " + TABLE_NAME +
-                " WHERE " + COL2 + " = '" + id_device +"'";
-        Cursor data = db.rawQuery(query, null);
-        return data;
-    }
-    public Cursor getTypeV4(String id_device){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + COL6 + " FROM " + TABLE_NAME +
-                " WHERE " + COL2 + " = '" + id_device +"'";
-        Cursor data = db.rawQuery(query, null);
-        return data;
-    }
-    public Cursor getTypeV5(String id_device){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + COL7 + " FROM " + TABLE_NAME +
-                " WHERE " + COL2 + " = '" + id_device +"'";
-        Cursor data = db.rawQuery(query, null);
-        return data;
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL2, id_device);
+        contentValues.put(COL3, v1);
+        contentValues.put(COL4, v2);
+        contentValues.put(COL5, v3);
+        contentValues.put(COL6, v4);
+        contentValues.put(COL7, v5);
+
+        long result = db.update(TABLE_NAME, contentValues, COL2 + " = ?", new String[]{id_device});
+        //if date as inserted incorrectly it will return -1
+        if (result == -1) {
+            db.close();
+            return false;
+        } else {
+            db.close();
+            return true;
+        }
+
     }
 
+    /**
+     * Delete from database
+     */
+    public void deleteName(String id_device, String title){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE "
+                + COL2 + " = '" + id_device + "'" +
+                " AND " + COL4 + " = '" + title + "'";
+        db.execSQL(query);
+    }
 
     /**
      * Returns all the data from database
@@ -112,14 +108,73 @@ public class DatabaseHelper_Device_Data extends SQLiteOpenHelper {
         return data;
     }
 
-    /**
-     * Delete from database
-     */
-    public void deleteName(String id_device, String title){
+    public String getTypeV1(String id_device){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "DELETE FROM " + TABLE_NAME + " WHERE "
-                + COL2 + " = '" + id_device + "'" +
-                " AND " + COL4 + " = '" + title + "'";
-        db.execSQL(query);
+        String query = "SELECT " + COL3 + " FROM " + TABLE_NAME +
+                " WHERE " + COL2 + " = '" + id_device +"'";
+        Cursor data = db.rawQuery(query, null);
+        String output = "0";
+        if (data.moveToFirst()) {
+            output = data.getString(data.getColumnIndex(COL3));
+        }
+        return output;
     }
+    public String getTypeV2(String id_device){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL4 + " FROM " + TABLE_NAME +
+                " WHERE " + COL2 + " = '" + id_device +"'";
+        Cursor data = db.rawQuery(query, null);
+        String output = "0";
+        if (data.moveToFirst()) {
+            output = data.getString(data.getColumnIndex(COL4));
+        }
+        return output;
+    }
+    public String getTypeV3(String id_device){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL5 + " FROM " + TABLE_NAME +
+                " WHERE " + COL2 + " = '" + id_device +"'";
+        Cursor data = db.rawQuery(query, null);
+        String output = "0";
+        if (data.moveToFirst()) {
+            output = data.getString(data.getColumnIndex(COL5));
+        }
+        return output;
+    }
+    public String getTypeV4(String id_device){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL6 + " FROM " + TABLE_NAME +
+                " WHERE " + COL2 + " = '" + id_device +"'";
+        Cursor data = db.rawQuery(query, null);
+        String output = "0";
+        if (data.moveToFirst()) {
+            output = data.getString(data.getColumnIndex(COL6));
+        }
+        return output;
+    }
+    public String getTypeV5(String id_device){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL7 + " FROM " + TABLE_NAME +
+                " WHERE " + COL2 + " = '" + id_device +"'";
+        Cursor data = db.rawQuery(query, null);
+        String output = "0";
+        if (data.moveToFirst()) {
+            output = data.getString(data.getColumnIndex(COL7));
+        }
+        return output;
+    }
+
+    public boolean CheckIsDataAlreadyInDBorNot(String id_device) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL7 + " FROM " + TABLE_NAME +
+                " WHERE " + COL2 + " = '" + id_device +"'";
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.getCount() <= 0) {
+            cursor.close();
+            return false;
+        }
+        cursor.close();
+        return true;
+    }
+
 }

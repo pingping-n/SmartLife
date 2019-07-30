@@ -19,6 +19,11 @@ public class AddDeviceDataDetailActivity extends AppCompatActivity implements Vi
     private ListView listView;
 
     DatabaseHelper_Device_Data mDatabaseHelper_device_data;
+    private String data1;
+    private String data2;
+    private String data3;
+    private String data4;
+    private String data5;
 
     private Intent intent;
 
@@ -44,6 +49,11 @@ public class AddDeviceDataDetailActivity extends AppCompatActivity implements Vi
         v_device = intent.getStringExtra("v_device");
 
         mDatabaseHelper_device_data = new DatabaseHelper_Device_Data(this);
+        data1 = mDatabaseHelper_device_data.getTypeV1(id_device);
+        data2 = mDatabaseHelper_device_data.getTypeV2(id_device);
+        data3 = mDatabaseHelper_device_data.getTypeV3(id_device);
+        data4 = mDatabaseHelper_device_data.getTypeV4(id_device);
+        data5 = mDatabaseHelper_device_data.getTypeV5(id_device);
 
         items = new ArrayList<>();
         items.add(new CustomList_Device_Data("50.0", 1));
@@ -74,19 +84,34 @@ public class AddDeviceDataDetailActivity extends AppCompatActivity implements Vi
         if (temp.equals("v1"))
         {
             v1 = String.valueOf(position);
-            v2 = v3 = v4 = v5 = "0";
+            v2 = data2;
+            v3 = data3;
+            v4 = data4;
+            v5 = data5;
         } else if(temp.equals("v2")) {
+            v1 = data1;
             v2 = String.valueOf(position);
-            v1 = v3 = v4 = v5 = "0";
+            v3 = data3;
+            v4 = data4;
+            v5 = data5;
         } else if (temp.equals("v3")) {
+            v1 = data1;
+            v2 = data2;
             v3 = String.valueOf(position);
-            v1 = v2 = v4 = v5 = "0";
+            v4 = data4;
+            v5 = data5;
         } else if (temp.equals("v4")) {
+            v1 = data1;
+            v2 = data2;
+            v3 = data3;
             v4 = String.valueOf(position);
-            v1 = v2 = v3 = v5 = "0";
+            v5 = data5;
         } else if(temp.equals("v5")) {
+            v1 = data1;
+            v2 = data2;
+            v3 = data3;
+            v4 = data4;
             v5 = String.valueOf(position);
-            v1 = v2 = v3 = v4 = "0";
         }
     }
 
@@ -94,18 +119,30 @@ public class AddDeviceDataDetailActivity extends AppCompatActivity implements Vi
     public void onClick(View v) {
         AddData(id_device, v1, v2, v3, v4, v5);
         Intent intent = new Intent(this, ShowDataDevice.class);
+        intent.putExtra("id_device", id_device);
         startActivity(intent);
     }
 
     public void AddData(String id_device, String v1, String v2, String v3, String v4, String v5) {
-        boolean insertData = mDatabaseHelper_device_data.addData(id_device, v1, v2, v3, v4, v5);
+        if (mDatabaseHelper_device_data.CheckIsDataAlreadyInDBorNot(id_device)) {
 
-        if (insertData) {
-            toastMessage("Data Successfully Inserted!");
+            boolean updateData = mDatabaseHelper_device_data.updateName(id_device, v1, v2, v3, v4, v5);
+            if (updateData) {
+                toastMessage("Data Successfully Inserted!");
+            } else {
+                toastMessage("Something went wrong");
+            }
         } else {
-            toastMessage("Something went wrong");
+            boolean insertData = mDatabaseHelper_device_data.addData(id_device, v1, v2, v3, v4, v5);
+
+            if (insertData) {
+                toastMessage("Data Successfully Updated!");
+            } else {
+                toastMessage("Something went wrong");
+            }
         }
     }
+
 
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();

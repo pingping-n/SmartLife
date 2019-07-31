@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.app.infideap.stylishwidget.view.AProgressBar
         android:id="@+id/progressbar"
         android:layout_width="match_parent"
-        android:layout_height="30dp" />
-
-    <!--<com.app.infideap.stylishwidget.view.AProgressBar-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="30dp"-->
-    <!--app:sw_maxValue="100"-->
-    <!--app:sw_progressBackground="#ccc"-->
-    <!--app:sw_progressColor="@color/colorAccent"-->
-    <!--app:sw_progressText="30%"-->
-    <!--app:sw_progressTextStyle="bold"-->
-    <!--app:sw_progressValue="30"-->
-    <!--app:sw_radius="7dp"-->
-    <!--app:sw_withAnimation="true" />-->
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:sw_maxValue="100"
+        app:sw_progressBackground="#ccc"
+        app:sw_progressColor="@color/colorAccent"
+        app:sw_progressText="30%"
+        app:sw_progressTextStyle="bold"
+        app:sw_progressValue="30"
+        app:sw_radius="7dp"
+        app:sw_withAnimation="false" />
 
 </FrameLayout>

@@ -183,6 +183,9 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
 
                             databaseHelper_device.deleteName(id_device, title);
 
+                            DatabaseHelper_Device_Data tempdel = new DatabaseHelper_Device_Data(getActivity());
+                            tempdel.updateName(id_device, "0", "0", "0", "0", "0");
+
                             Toast.makeText(getActivity(), "Item Deleted", Toast.LENGTH_LONG).show();
                         }
                     })

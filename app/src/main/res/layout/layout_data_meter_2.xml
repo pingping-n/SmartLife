@@ -8,18 +8,18 @@
 
     <pl.pawelkleczkowski.customgauge.CustomGauge
         android:id="@+id/meter2"
-        android:layout_width="240dp"
+        android:layout_width="match_parent"
         android:layout_height="240dp"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:layout_gravity="center"
-        app:gaugeEndValue="800"
+        app:gaugeEndValue="100"
         app:gaugePointEndColor="@color/colorPrimary"
         app:gaugePointStartColor="@color/colorPrimaryDark"
         app:gaugeStartAngle="135"
-        app:gaugeStartValue="200"
+        app:gaugeStartValue="0"
         app:gaugeStrokeCap="ROUND"
         app:gaugeStrokeColor="#9f9f9f"
         app:gaugeStrokeWidth="10dp"
@@ -32,7 +32,7 @@
         android:layout_alignBottom="@+id/meter2"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:text="0/800"
+        android:text="0/100"
         android:textSize="30dp"
         android:textStyle="bold" />
 

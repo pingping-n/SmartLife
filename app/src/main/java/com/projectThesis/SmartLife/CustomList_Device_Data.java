@@ -7,6 +7,7 @@ public class CustomList_Device_Data {
     public static final int TYPE_METER_1 = 2;
     public static final int TYPE_METER_2 = 3;
     public static final int TYPE_METER_3 = 4;
+    public static final int TYPE_METER_4 = 5;
 
     private String data;
     private int    type;

@@ -51,8 +51,6 @@ public class AddDeviceActivity extends AppCompatActivity implements View.OnClick
     }
 
 
-
-
     private List<Device_View> getDeviceList() {
         device_viewList = new ArrayList<>();
         device_viewList.add(new Device_View("1", "111111111 SMART LIFE"));

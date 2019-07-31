@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.app.infideap.stylishwidget.view.*;
 
-
+import de.nitri.gauge.Gauge;
 import pl.pawelkleczkowski.customgauge.CustomGauge;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class MultipleLayoutAdapter extends BaseAdapter {
 
     @Override
     public int getViewTypeCount() {
-        return 3;
+        return 6;
     }
 
     @Override
@@ -70,6 +70,9 @@ public class MultipleLayoutAdapter extends BaseAdapter {
                 break;
             case CustomList_Device_Data.TYPE_METER_3:
                 convertView = inflateMeter3(convertView, parent, item);
+                break;
+            case CustomList_Device_Data.TYPE_METER_4:
+                convertView = inflateMeter4(convertView, parent, item);
                 break;
         }
         return convertView;
@@ -172,7 +175,7 @@ public class MultipleLayoutAdapter extends BaseAdapter {
     private View inflateMeter2(View convertView, ViewGroup parent, CustomList_Device_Data item) {
         Meter2ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.layout_data_meter2, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.layout_data_meter_2, parent, false);
             viewHolder = new Meter2ViewHolder(convertView);
             convertView.setTag(viewHolder);
         }
@@ -200,7 +203,7 @@ public class MultipleLayoutAdapter extends BaseAdapter {
     private View inflateMeter3(View convertView, ViewGroup parent, CustomList_Device_Data item) {
         Meter3ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.layout_data_meter3, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.layout_data_meter_3, parent, false);
             viewHolder = new Meter3ViewHolder(convertView);
             convertView.setTag(viewHolder);
         }
@@ -217,5 +220,30 @@ public class MultipleLayoutAdapter extends BaseAdapter {
         return convertView;
     }
     /** ------------------------------------------------------------------------------------------------ **/
+    /** Meter 4 **/
+    static class Meter4ViewHolder {
+        private Gauge gauge;
 
+        public Meter4ViewHolder(View view) {
+            this.gauge = (Gauge) view.findViewById(R.id.gauge);
+        }
+    }
+    private View inflateMeter4(View convertView, ViewGroup parent, CustomList_Device_Data item) {
+        Meter4ViewHolder viewHolder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.layout_data_meter_4, parent, false);
+            viewHolder = new Meter4ViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        }
+        else {
+            viewHolder = (Meter4ViewHolder) convertView.getTag();
+        }
+        if (Float.parseFloat(item.getData()) > 100) {
+            viewHolder.gauge.setMaxValue(Float.parseFloat(item.getData()) + 50);
+        }
+        viewHolder.gauge.setValue(Float.parseFloat(item.getData()));
+
+        return convertView;
+    }
+    /** ------------------------------------------------------------------------------------------------ **/
 }

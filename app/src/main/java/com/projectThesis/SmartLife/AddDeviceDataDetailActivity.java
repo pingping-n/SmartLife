@@ -60,6 +60,7 @@ public class AddDeviceDataDetailActivity extends AppCompatActivity implements Vi
         items.add(new CustomList_Device_Data("68.2", 2));
         items.add(new CustomList_Device_Data("49.7", 3));
         items.add(new CustomList_Device_Data("88.7", 4));
+        items.add(new CustomList_Device_Data("28.7", 5));
 
 
         MultipleLayoutAdapter adapter = new MultipleLayoutAdapter(this, items);

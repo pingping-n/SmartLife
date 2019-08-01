@@ -1,12 +1,16 @@
 package com.projectThesis.SmartLife;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.view.Menu;
@@ -35,7 +39,7 @@ public class ShowDataDevice extends AppCompatActivity {
 
     DatabaseHelper_Device_Data databaseHelper_device_data;
     private MultipleLayoutAdapter adapter;
-
+    AlertDialog.Builder builder;
     private String[] data;
     private String[] vt;
 
@@ -49,7 +53,7 @@ public class ShowDataDevice extends AppCompatActivity {
         id_device = intent.getStringExtra("id_device");
 
         intent = new Intent(this, AddDeviceDataActivity.class);
-
+        builder = new AlertDialog.Builder(this);
         listView = (ListView) findViewById(R.id.listView_Device_Data);
 
         databaseHelper_device_data = new DatabaseHelper_Device_Data(this);
@@ -76,15 +80,17 @@ public class ShowDataDevice extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         handler = new Handler();
-        Cursor test = databaseHelper_device_data.getData();
-        int i = 0;
-        System.out.println("C: "+test.getCount());
-        if (test.moveToFirst() ){
-            do {
-                System.out.println("id_device: " + test.getString(i));
-                i++;
-            } while (test.moveToNext());
-        }
+//        Cursor test = databaseHelper_device_data.getData();
+////        int i = 0;
+////        System.out.println("C: "+test.getCount());
+////        if (test.moveToFirst() ){
+////            do {
+////                System.out.println("id_device: " + test.getString(i));
+////                i++;
+////            } while (test.moveToNext());
+////        }
+
+        listView.setOnItemLongClickListener(onItemLongClick);
 
     }
 
@@ -97,7 +103,7 @@ public class ShowDataDevice extends AppCompatActivity {
             public void run() {
                 items = new ArrayList<>();
                 new setShowDataAPI().execute();
-                handler.postDelayed(this, 5000);
+                handler.postDelayed(this, 10000);
             }
         };
 
@@ -224,6 +230,44 @@ public class ShowDataDevice extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    // On long click item delete
+    AdapterView.OnItemLongClickListener onItemLongClick = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+            final int p = position + 1;
+            final String id_devices = id_device;
+
+            builder.setMessage("Do you want to delete v" + p + " ?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            data[p] = "0";
+
+                            DatabaseHelper_Device_Data tempdel = new DatabaseHelper_Device_Data(ShowDataDevice.this);
+                            tempdel.updateName(id_devices, data[1], data[2], data[3], data[4], data[5]);
+
+                            Toast.makeText(ShowDataDevice.this, "Item Deleted", Toast.LENGTH_LONG).show();
+
+                            finish();
+                            startActivity(getIntent());
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.setTitle("Confirm to delete?");
+            alertDialog.show();
+
+            return true;
+        }
+    };
 
     @Override
     public void onBackPressed() {

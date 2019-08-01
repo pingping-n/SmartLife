@@ -282,6 +282,7 @@ public class ShowDataDevice extends AppCompatActivity {
     public void onBackPressed() {
         handler.removeCallbacks(runnable);
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("nav_back", 1);
         startActivity(intent);
         finish();
         super.onBackPressed();

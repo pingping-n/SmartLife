@@ -15,13 +15,30 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
+        int nav_back = intent.getIntExtra("nav_back", 0);
+
+
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
 
         //First navigation selected
-        navigation.getMenu().getItem(0).setChecked(true);
-        onNavigationItemSelected(navigation.getMenu().getItem(0));
-        loadFragment(new Home_Fragment());
+        navigation.getMenu().getItem(nav_back).setChecked(true);
+        onNavigationItemSelected(navigation.getMenu().getItem(nav_back));
+        switch (nav_back) {
+            case 1:
+                loadFragment(new MyDevice_Fragment());
+                break;
+            case 2:
+                loadFragment(new Setting_Fragment());
+                break;
+            case 3:
+                loadFragment(new Help_Fragment());
+                break;
+            case 0:
+                loadFragment(new Home_Fragment());
+                break;
+        }
     }
 
     public void setActionBarTitle(String title) {

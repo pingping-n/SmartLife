@@ -27,7 +27,7 @@ public class AddDeviceDataDetailActivity extends AppCompatActivity implements Vi
 
     private Intent intent;
 
-    private List items;
+    private List<CustomList_Device_Data> items;
     private String id_device;
     private String v_device;
     private String v1 = "0";

@@ -155,6 +155,7 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
 
             Intent intent = new Intent(getActivity(), ShowDataDevice.class);
             intent.putExtra("id_device", myDevice_viewList.get(position).getId_device());
+            intent.putExtra("title_device", myDevice_viewList.get(position).getTitle());
             startActivity(intent);
 
         }

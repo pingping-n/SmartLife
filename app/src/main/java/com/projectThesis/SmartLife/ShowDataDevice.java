@@ -33,6 +33,7 @@ public class ShowDataDevice extends AppCompatActivity {
     private ListView listView;
     private List<CustomList_Device_Data> items;
     private String id_device;
+    private String title_device;
 
     private Intent intent;
     private Handler handler;
@@ -55,10 +56,11 @@ public class ShowDataDevice extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_data_device);
-        setTitle("title device");
 
         intent = getIntent();
         id_device = intent.getStringExtra("id_device");
+        title_device = intent.getStringExtra("title_device");
+        this.setTitle(title_device);
 
         intent = new Intent(this, AddDeviceDataActivity.class);
         builder = new AlertDialog.Builder(this);
@@ -90,15 +92,6 @@ public class ShowDataDevice extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         handler = new Handler();
-//        Cursor test = databaseHelper_device_data.getData();
-////        int i = 0;
-////        System.out.println("C: "+test.getCount());
-////        if (test.moveToFirst() ){
-////            do {
-////                System.out.println("id_device: " + test.getString(i));
-////                i++;
-////            } while (test.moveToNext());
-////        }
 
         listView.setOnItemLongClickListener(onItemLongClick);
 

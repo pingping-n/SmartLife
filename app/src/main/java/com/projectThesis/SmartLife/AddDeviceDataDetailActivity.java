@@ -56,11 +56,11 @@ public class AddDeviceDataDetailActivity extends AppCompatActivity implements Vi
         data5 = mDatabaseHelper_device_data.getTypeV5(id_device);
 
         items = new ArrayList<>();
-        items.add(new CustomList_Device_Data("72.6", 1));
-        items.add(new CustomList_Device_Data("68.2", 2));
-        items.add(new CustomList_Device_Data("49.7", 3));
-        items.add(new CustomList_Device_Data("88.7", 4));
-        items.add(new CustomList_Device_Data("28.7", 5));
+        items.add(new CustomList_Device_Data("72.6", 1, "L1"));
+        items.add(new CustomList_Device_Data("68.2", 2, "L2"));
+        items.add(new CustomList_Device_Data("49.7", 3, "L3"));
+        items.add(new CustomList_Device_Data("88.7", 4, "L4"));
+        items.add(new CustomList_Device_Data("28.7", 5, "L5"));
 
 
         MultipleLayoutAdapter adapter = new MultipleLayoutAdapter(this, items);

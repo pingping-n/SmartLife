@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/background_custom"
-    tools:context=".ShowDataDevice">
+    android:orientation="vertical">
 
     <ListView
         android:id="@+id/listView_Device_Data"

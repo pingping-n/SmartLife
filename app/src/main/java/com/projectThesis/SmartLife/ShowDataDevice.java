@@ -1,6 +1,5 @@
 package com.projectThesis.SmartLife;
 
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +14,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.view.Menu;
 import android.os.AsyncTask;
+
+import com.app.infideap.stylishwidget.view.Stylish;
 
 import java.util.*;
 
@@ -42,9 +43,16 @@ public class ShowDataDevice extends AppCompatActivity {
     AlertDialog.Builder builder;
     private String[] data;
     private String[] vt;
+    private String[] vTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String fontFolder = "/";
+        Stylish.getInstance().set(
+                fontFolder.concat("multicolore.otf"),
+                fontFolder.concat("multicolore.otf"),
+                fontFolder.concat("multicolore.otf"));
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_data_device);
         setTitle("title device");
@@ -67,13 +75,15 @@ public class ShowDataDevice extends AppCompatActivity {
 
         items = new ArrayList<>();
         vt = new String[6];
+        vTitle = new String[6];
         for (int i = 1; i <= 5; i++) {
             vt[i] = "0";
+            vTitle[i] = "v" + i;
         }
 
         for (int i = 1; i <= 5; i++) {
             vt[i] = "0";
-            items.add(new CustomList_Device_Data(vt[i], Integer.parseInt(data[i])));
+            items.add(new CustomList_Device_Data(vt[i], Integer.parseInt(data[i]), vTitle[i]));
         }
 
         adapter = new MultipleLayoutAdapter(getApplicationContext(), items);
@@ -103,10 +113,9 @@ public class ShowDataDevice extends AppCompatActivity {
             public void run() {
                 items = new ArrayList<>();
                 new setShowDataAPI().execute();
-                handler.postDelayed(this, 10000);
+                handler.postDelayed(this, 8000);
             }
         };
-
     }
 
     private class setShowDataAPI extends AsyncTask<Void, Void, Void> {
@@ -160,7 +169,7 @@ public class ShowDataDevice extends AppCompatActivity {
                     }
 
                     for (int i = 1; i <= 5; i++) {
-                        items.add(new CustomList_Device_Data(vt[i], Integer.parseInt(data[i])));
+                        items.add(new CustomList_Device_Data(vt[i], Integer.parseInt(data[i]), vTitle[i]));
                     }
 
                 } catch (final JSONException e) {

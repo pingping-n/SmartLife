@@ -11,6 +11,7 @@ public class CustomList_Device_Data {
 
     private String data;
     private int    type;
+    private String title;
 
     public String getData() {
         return data;
@@ -28,9 +29,18 @@ public class CustomList_Device_Data {
         this.type = type;
     }
 
-    public CustomList_Device_Data(String data, int type) {
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public CustomList_Device_Data(String data, int type, String title) {
         this.data = data;
         this.type = type;
+        this.title = title;
     }
 
 

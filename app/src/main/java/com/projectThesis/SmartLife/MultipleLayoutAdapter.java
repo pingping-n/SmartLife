@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.app.infideap.stylishwidget.view.*;
 
+import org.w3c.dom.Text;
+
 import de.nitri.gauge.Gauge;
 import pl.pawelkleczkowski.customgauge.CustomGauge;
 
@@ -105,9 +107,11 @@ public class MultipleLayoutAdapter extends BaseAdapter {
     /** Meter 1 **/
     static class MeterViewHolder {
         private AMeter meter;
+        private TextView title;
 
         public MeterViewHolder(View view) {
             this.meter = (AMeter) view.findViewById(R.id.meter);
+            this.title = (TextView) view.findViewById(R.id.textView_meter1);
         }
     }
     private View inflateMeter(View convertView, ViewGroup parent, CustomList_Device_Data item) {
@@ -126,6 +130,7 @@ public class MultipleLayoutAdapter extends BaseAdapter {
             viewHolder.meter.setMaxValue(Float.parseFloat(item.getData()) + 50);
         }
         viewHolder.meter.setValue(Float.parseFloat(item.getData()));
+        viewHolder.title.setText(item.getTitle());
 
         return convertView;
     }
@@ -133,9 +138,11 @@ public class MultipleLayoutAdapter extends BaseAdapter {
     /** ProgressBar **/
     static class ProgressBarViewHolder {
         private AProgressBar progressBar;
+        private TextView title;
 
         public ProgressBarViewHolder(View view) {
             this.progressBar = (AProgressBar) view.findViewById(R.id.progressbar);
+            this.title = (TextView) view.findViewById(R.id.textView_progressbar);
         }
     }
     private View inflateProgressBar(View convertView, ViewGroup parent, CustomList_Device_Data item) {
@@ -157,7 +164,7 @@ public class MultipleLayoutAdapter extends BaseAdapter {
         }
         viewHolder.progressBar.setProgressValue(Float.parseFloat(item.getData()));
         viewHolder.progressBar.setProgressText(item.getData());
-
+        viewHolder.title.setText(item.getTitle());
 
         return convertView;
     }
@@ -166,10 +173,12 @@ public class MultipleLayoutAdapter extends BaseAdapter {
     static class Meter2ViewHolder {
         private CustomGauge meter2;
         private TextView textView;
+        private TextView title;
 
         public Meter2ViewHolder(View view) {
             this.meter2 = (CustomGauge) view.findViewById(R.id.meter2);
             this.textView = (TextView) view.findViewById(R.id.meter2TextView);
+            this.title = (TextView) view.findViewById(R.id.textView_meter2);
         }
     }
     private View inflateMeter2(View convertView, ViewGroup parent, CustomList_Device_Data item) {
@@ -188,6 +197,7 @@ public class MultipleLayoutAdapter extends BaseAdapter {
         }
         viewHolder.meter2.setValue(temp);
         viewHolder.textView.setText(String.valueOf(temp));
+        viewHolder.title.setText(item.getTitle());
 
         return convertView;
     }
@@ -195,9 +205,11 @@ public class MultipleLayoutAdapter extends BaseAdapter {
     /** Meter 3 **/
     static class Meter3ViewHolder {
         private AMeter meter;
+        private TextView title;
 
         public Meter3ViewHolder(View view) {
             this.meter = (AMeter) view.findViewById(R.id.meter3);
+            this.title = (TextView) view.findViewById(R.id.textView_meter3);
         }
     }
     private View inflateMeter3(View convertView, ViewGroup parent, CustomList_Device_Data item) {
@@ -216,6 +228,7 @@ public class MultipleLayoutAdapter extends BaseAdapter {
             viewHolder.meter.setMaxValue(Float.parseFloat(item.getData()) + 50);
         }
         viewHolder.meter.setValue(Float.parseFloat(item.getData()));
+        viewHolder.title.setText(item.getTitle());
 
         return convertView;
     }
@@ -223,9 +236,11 @@ public class MultipleLayoutAdapter extends BaseAdapter {
     /** Meter 4 **/
     static class Meter4ViewHolder {
         private Gauge gauge;
+        private TextView title;
 
         public Meter4ViewHolder(View view) {
             this.gauge = (Gauge) view.findViewById(R.id.gauge);
+            this.title = (TextView) view.findViewById(R.id.textView_meter4);
         }
     }
     private View inflateMeter4(View convertView, ViewGroup parent, CustomList_Device_Data item) {
@@ -242,6 +257,7 @@ public class MultipleLayoutAdapter extends BaseAdapter {
             viewHolder.gauge.setMaxValue(Float.parseFloat(item.getData()) + 50);
         }
         viewHolder.gauge.setValue(Float.parseFloat(item.getData()));
+        viewHolder.title.setText(item.getTitle());
 
         return convertView;
     }

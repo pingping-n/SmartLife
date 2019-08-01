@@ -101,11 +101,10 @@ public class AddDeviceDataActivity extends AppCompatActivity implements View.OnC
             HttpHandler sh = new HttpHandler();
             // Making a request to url and getting response
             String jsonStr = sh.makeServiceCall(url + id_device + "/last");
-
             if (jsonStr != null) {
                 try {
                     JSONArray jsonArray = new JSONArray(jsonStr);
-                    System.out.println(jsonArray);
+                    System.out.println("json :" + jsonArray);
                     JSONObject jsonObject = jsonArray.getJSONObject(0);
                     for (String key : iterate(jsonObject.keys()))
                     {

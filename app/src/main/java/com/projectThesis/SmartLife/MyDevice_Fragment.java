@@ -151,7 +151,7 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
     AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            //Toast.makeText(getActivity(), myDevice_viewList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), myDevice_viewList.get(position).getId_device(), Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(getActivity(), ShowDataDevice.class);
             intent.putExtra("id_device", myDevice_viewList.get(position).getId_device());

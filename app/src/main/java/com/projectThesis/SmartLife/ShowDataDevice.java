@@ -124,11 +124,11 @@ public class ShowDataDevice extends AppCompatActivity {
             HttpHandler sh = new HttpHandler();
             // Making a request to url and getting response
             String jsonStr = sh.makeServiceCall(url + id_device + "/last");
-
+//            System.out.println(url + id_device + "/last");
             if (jsonStr != null) {
                 try {
                     JSONArray jsonArray = new JSONArray(jsonStr);
-                    System.out.println(jsonArray);
+//                    System.out.println(jsonArray);
                     JSONObject jsonObject = jsonArray.getJSONObject(0);
 //                    vt[1] = jsonObject.getString("v1");
 //                    vt[2] = jsonObject.getString("v2");
@@ -140,23 +140,23 @@ public class ShowDataDevice extends AppCompatActivity {
                         if (!key.equals("_id") && !key.equals("id") && !key.equals("Date") && !key.equals("__v")) {
                             if (key.equals("v1")) {
                                 vt[1] = jsonObject.getString(key);
-                                System.out.println("key: " + key + ": " + vt[1]);
+//                                System.out.println("key: " + key + ": " + vt[1]);
                             }
                             if (key.equals("v2")) {
                                 vt[2] = jsonObject.getString(key);
-                                System.out.println("key: " + key + ": " + vt[2]);
+//                                System.out.println("key: " + key + ": " + vt[2]);
                             }
                             if (key.equals("v3")) {
                                 vt[3] = jsonObject.getString(key);
-                                System.out.println("key: " + key + ": " + vt[3]);
+//                                System.out.println("key: " + key + ": " + vt[3]);
                             }
                             if (key.equals("v4")) {
                                 vt[4] = jsonObject.getString(key);
-                                System.out.println("key: " + key + ": " + vt[4]);
+//                                System.out.println("key: " + key + ": " + vt[4]);
                             }
                             if (key.equals("v5")) {
                                 vt[5] = jsonObject.getString(key);
-                                System.out.println("key: " + key + ": " + vt[5]);
+//                                System.out.println("key: " + key + ": " + vt[5]);
                             }
                         }
                     }

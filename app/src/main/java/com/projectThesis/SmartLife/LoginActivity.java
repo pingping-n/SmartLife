@@ -95,11 +95,11 @@ public class LoginActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    viewDialog.hideDialog();
                     if (!isLoggedin) {
                         databaseHelper_user.addUser(username, password);
                     }
                     passLogin();
+                    viewDialog.hideDialog();
                 }
             }, 1000);
 

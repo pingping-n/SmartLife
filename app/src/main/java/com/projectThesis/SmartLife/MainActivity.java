@@ -11,28 +11,23 @@ import android.view.MenuItem;
 
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+    private DatabaseHelper_User databaseHelper_user;
+    private DatabaseHelper_Device databaseHelper_device;
     private DatabaseHelper_Device_Data databaseHelper_device_data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        databaseHelper_user = new DatabaseHelper_User(this);
+        databaseHelper_device = new DatabaseHelper_Device(this);
+        databaseHelper_device_data = new DatabaseHelper_Device_Data(this);
+
         Intent intent = getIntent();
         int nav_back = intent.getIntExtra("nav_back", 0);
 
-        databaseHelper_device_data = new DatabaseHelper_Device_Data(this);
-        Cursor test = databaseHelper_device_data.getData();
-        int i = 0;
-//        System.out.println("C: "+test.getCount());
-        if (test.moveToFirst() ){
-            do {
-                //System.out.println("id_device: " + test.getString(i));
-                i++;
-            } while (test.moveToNext());
-        }
-
-        getSupportActionBar().setSubtitle("You have " + i + " devices");
-        getSupportActionBar().setLogo(R.drawable.ic_info);
+        setSubtitleBar();
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
@@ -86,4 +81,26 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return loadFragment(fragment);
     }
 
+    public void setSubtitleBar() {
+        databaseHelper_device_data = new DatabaseHelper_Device_Data(this);
+        Cursor test = databaseHelper_device_data.getData();
+        int i = 0;
+//        System.out.println("C: "+test.getCount());
+        if (test.moveToFirst() ){
+            do {
+                //System.out.println("id_device: " + test.getString(i));
+                i++;
+            } while (test.moveToNext());
+        }
+
+        getSupportActionBar().setSubtitle("You have " + i + " devices");
+        getSupportActionBar().setLogo(R.drawable.ic_info);
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setSubtitleBar();
+    }
 }

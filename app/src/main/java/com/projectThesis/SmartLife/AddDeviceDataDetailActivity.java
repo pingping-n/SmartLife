@@ -2,6 +2,7 @@ package com.projectThesis.SmartLife;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,11 +37,15 @@ public class AddDeviceDataDetailActivity extends AppCompatActivity implements Vi
     private String v4 = "0";
     private String v5 = "0";
 
+    private ViewDialog viewDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_list_device);
         setTitle("select layout");
+        viewDialog = new ViewDialog(this);
+
         add_device_end = (Button) findViewById(R.id.button_add_device_selected);
         listView = (ListView) findViewById(R.id.my_ListView_Device);
 
@@ -121,15 +126,23 @@ public class AddDeviceDataDetailActivity extends AppCompatActivity implements Vi
 
     @Override
     public void onClick(View v) {
-        AddData(id_device, v1, v2, v3, v4, v5);
-        Intent intent = new Intent(this, ShowDataDevice.class);
-        intent.putExtra("id_device", id_device);
-        startActivity(intent);
+        viewDialog.showDialog();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                viewDialog.hideDialog();
+                AddData(id_device, v1, v2, v3, v4, v5);
+                Intent intent = new Intent(getApplicationContext(), ShowDataDevice.class);
+                intent.putExtra("id_device", id_device);
+                startActivity(intent);
+            }
+        }, 1000);
     }
 
     public void AddData(String id_device, String v1, String v2, String v3, String v4, String v5) {
-        if (mDatabaseHelper_device_data.CheckIsDataAlreadyInDBorNot(id_device)) {
 
+        if (mDatabaseHelper_device_data.CheckIsDataAlreadyInDBorNot(id_device)) {
             boolean updateData = mDatabaseHelper_device_data.updateName(id_device, v1, v2, v3, v4, v5);
             if (updateData) {
                 toastMessage("Data Successfully Inserted!");

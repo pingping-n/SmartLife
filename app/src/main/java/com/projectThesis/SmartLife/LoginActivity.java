@@ -3,6 +3,7 @@ package com.projectThesis.SmartLife;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mUsername;
     private EditText mPassword;
     private Context mContext;
+    private ViewDialog viewDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,13 +46,16 @@ public class LoginActivity extends AppCompatActivity {
         mUsername = (EditText) findViewById(R.id.input_email);
         mPassword = (EditText) findViewById(R.id.input_password);
         mContext = this;
+        viewDialog = new ViewDialog(this);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                viewDialog.showDialog();
                 checkLogin();
             }
         });
@@ -62,15 +67,29 @@ public class LoginActivity extends AppCompatActivity {
         String password = mPassword.getText().toString().trim();
 
         boolean isSuccess = checkLoginValidate(username, password);
-//        boolean isSuccess = true;
 
         if (isSuccess) {
-            Intent intent = new Intent(mContext, MainActivity.class);
-            startActivity(intent);
-            finish();
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    viewDialog.hideDialog();
+                    Intent intent = new Intent(mContext, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }, 2000);
+
         } else {
-            String message = getString(R.string.login_error_message);
-            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    viewDialog.hideDialog();
+                    String message = getString(R.string.login_error_message);
+                    Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+                }
+            }, 2000);
         }
     }
 
@@ -95,7 +114,6 @@ public class LoginActivity extends AppCompatActivity {
             try(DataOutputStream wr = new DataOutputStream(conn.getOutputStream())) {
                 wr.write( postData );
                 wr.flush();
-                wr.close();
             }
 
             int responseCode = conn.getResponseCode();
@@ -116,6 +134,7 @@ public class LoginActivity extends AppCompatActivity {
             //print result
             System.out.println(response.toString());
             if (response.toString().equals("successful")) {
+                viewDialog.hideDialog();
                 return true;
             }
 

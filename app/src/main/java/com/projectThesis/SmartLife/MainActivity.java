@@ -6,13 +6,15 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.MenuItem;
 import android.content.Intent;
 import android.database.Cursor;
 import android.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-
+    private String username;
+    private DatabaseHelper_Device_Data databaseHelper_device_data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,10 +23,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Intent intent = getIntent();
         int nav_back = intent.getIntExtra("nav_back", 0);
 
-        DatabaseHelper_Device_Data databaseHelper_device_data = new DatabaseHelper_Device_Data(this);
+        databaseHelper_device_data = new DatabaseHelper_Device_Data(this);
         Cursor test = databaseHelper_device_data.getData();
         int i = 0;
-        System.out.println("C: "+test.getCount());
+//        System.out.println("C: "+test.getCount());
         if (test.moveToFirst() ){
             do {
                 //System.out.println("id_device: " + test.getString(i));
@@ -41,20 +43,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         //First navigation selected
         navigation.getMenu().getItem(nav_back).setChecked(true);
         onNavigationItemSelected(navigation.getMenu().getItem(nav_back));
-        switch (nav_back) {
-            case 1:
-                loadFragment(new MyDevice_Fragment());
-                break;
-            case 2:
-                loadFragment(new Setting_Fragment());
-                break;
-            case 3:
-                loadFragment(new Help_Fragment());
-                break;
-            case 0:
-                loadFragment(new Home_Fragment());
-                break;
-        }
     }
 
     public void setActionBarTitle(String title) {

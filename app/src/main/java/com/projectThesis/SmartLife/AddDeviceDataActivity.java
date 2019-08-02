@@ -44,7 +44,7 @@ public class AddDeviceDataActivity extends AppCompatActivity implements View.OnC
 
         intent = getIntent();
         id_device = intent.getStringExtra("id_device");
-        intent = new Intent(this, AddDeviceDataDetailActivity.class);
+
         mDatabaseHelper_device_data = new DatabaseHelper_Device_Data(this);
 
         add_device = (Button) findViewById(R.id.button_add_device_selected);
@@ -82,6 +82,7 @@ public class AddDeviceDataActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
+        intent = new Intent(this, AddDeviceDataDetailActivity.class);
         intent.putExtra("id_device", id_device);
         intent.putExtra("v_device", v_device);
 

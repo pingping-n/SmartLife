@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPassword;
     private Context mContext;
     private ViewDialog viewDialog;
+    private DatabaseHelper_User databaseHelper_user;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,32 +52,52 @@ public class LoginActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        databaseHelper_user = new DatabaseHelper_User(this);
+        String usernameDB = databaseHelper_user.getUser();
+        String passwordDB = databaseHelper_user.getPassword();
+
+        if (!usernameDB.equals("") && !passwordDB.equals("")) {
+            viewDialog.showDialog();
+            checkLogin(usernameDB, passwordDB);
+            viewDialog.hideDialog();
+        }
 
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String username = mUsername.getText().toString().trim().toLowerCase();
+                String password = mPassword.getText().toString().trim();
                 viewDialog.showDialog();
-                checkLogin();
+                checkLogin(username, password);
             }
         });
 
+
     }
 
-    private void checkLogin() {
-        String username = mUsername.getText().toString().trim().toLowerCase();
-        String password = mPassword.getText().toString().trim();
+    public void passLogin() {
+        Intent intent = new Intent(mContext, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
+    private void checkLogin(final String username, final String password) {
+        viewDialog.showDialog();
         boolean isSuccess = checkLoginValidate(username, password);
-
         if (isSuccess) {
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     viewDialog.hideDialog();
-                    Intent intent = new Intent(mContext, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    databaseHelper_user.addUser(username, password);
+                    passLogin();
                 }
             }, 2000);
 
@@ -117,9 +138,9 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             int responseCode = conn.getResponseCode();
-            System.out.println("\nSending 'POST' request to URL : " + url);
-            System.out.println("Post parameters : " + urlParameters);
-            System.out.println("Response Code : " + responseCode);
+//            System.out.println("\nSending 'POST' request to URL : " + url);
+//            System.out.println("Post parameters : " + urlParameters);
+//            System.out.println("Response Code : " + responseCode);
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(conn.getInputStream()));
@@ -132,9 +153,8 @@ public class LoginActivity extends AppCompatActivity {
             in.close();
 
             //print result
-            System.out.println(response.toString());
+//            System.out.println(response.toString());
             if (response.toString().equals("successful")) {
-                viewDialog.hideDialog();
                 return true;
             }
 

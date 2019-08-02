@@ -26,8 +26,7 @@ import org.json.JSONObject;
 
 
 public class ShowDataDevice extends AppCompatActivity {
-
-
+    private String username;
     private final static String url = "http://146.148.42.206:4000/api/value/";
 
     private ListView listView;
@@ -60,6 +59,7 @@ public class ShowDataDevice extends AppCompatActivity {
         intent = getIntent();
         id_device = intent.getStringExtra("id_device");
         title_device = intent.getStringExtra("title_device");
+        username = intent.getStringExtra("username");
         this.setTitle(title_device);
 
         intent = new Intent(this, AddDeviceDataActivity.class);
@@ -170,7 +170,8 @@ public class ShowDataDevice extends AppCompatActivity {
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(),
-                                    "Json parsing error: " + e.getMessage(),
+//                                    "Json parsing error: " + e.getMessage(),
+                                    "Device not have Unit!",
                                     Toast.LENGTH_LONG).show();
                         }
                     });
@@ -182,7 +183,8 @@ public class ShowDataDevice extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
+//                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                "Can not connect server! \nPlease check your internet",
                                 Toast.LENGTH_LONG).show();
                     }
                 });
@@ -225,6 +227,7 @@ public class ShowDataDevice extends AppCompatActivity {
 
                 //Toast.makeText(getApplicationContext(), "Item 1 Selected", Toast.LENGTH_LONG).show();
                 intent.putExtra("id_device", id_device);
+                intent.putExtra("username", username);
                 startActivity(intent);
                 return true;
 

@@ -26,10 +26,11 @@ import java.util.List;
 
 
 public class MyDevice_Fragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
-
+    private String username;
     static final int VIEW_MODE_LISTVIEW = 0;
     static final int VIEW_MODE_GRIDVIEW = 1;
-    DatabaseHelper_Device databaseHelper_device;
+    private DatabaseHelper_Device databaseHelper_device;
+    private DatabaseHelper_User databaseHelper_user;
     private ToggleButton switch_view;
     private ViewStub stubGrid;
     private ViewStub stubList;
@@ -45,9 +46,10 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        databaseHelper_user = new DatabaseHelper_User(getContext());
+        username = databaseHelper_user.getUser();
         // Set title bar
-        ((MainActivity) getActivity()).setActionBarTitle("my device");
+        ((MainActivity) getActivity()).setActionBarTitle(username);
 
         return inflater.inflate(R.layout.fragment_mydevice, null);
     }
@@ -156,6 +158,7 @@ public class MyDevice_Fragment extends Fragment implements CompoundButton.OnChec
             Intent intent = new Intent(getActivity(), ShowDataDevice.class);
             intent.putExtra("id_device", myDevice_viewList.get(position).getId_device());
             intent.putExtra("title_device", myDevice_viewList.get(position).getTitle());
+            intent.putExtra("username", username);
             startActivity(intent);
 
         }

@@ -11,15 +11,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class Home_Fragment extends Fragment {
-
+    private String username;
     private Button button_add_device;
+
+    private DatabaseHelper_User databaseHelper_user;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        databaseHelper_user = new DatabaseHelper_User(getContext());
+        username = databaseHelper_user.getUser();
         // Set title bar
-        ((MainActivity) getActivity()).setActionBarTitle("home");
+        ((MainActivity) getActivity()).setActionBarTitle(username);
 
         return inflater.inflate(R.layout.fragment_home, null);
     }
@@ -34,6 +37,7 @@ public class Home_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddDeviceActivity.class);
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });

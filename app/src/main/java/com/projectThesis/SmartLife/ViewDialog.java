@@ -6,7 +6,6 @@ import android.view.Window;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 public class ViewDialog {
 
@@ -23,18 +22,16 @@ public class ViewDialog {
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.custom_loading_layout);
 
-        ImageView gifImageView = (ImageView) dialog.findViewById(R.id.custom_loading_imageView);
+        final ImageView gifImageView = (ImageView) dialog.findViewById(R.id.custom_loading_imageView);
 
-        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(gifImageView);
-
-        Glide.with(activity)
+                Glide.with(activity)
+                .asGif()
                 .load(R.drawable.loading)
                 .placeholder(R.drawable.loading)
                 .centerCrop()
-                .crossFade()
-                .into(imageViewTarget);
+                .into(gifImageView);
 
-        dialog.show();
+                dialog.show();
     }
 
     public void hideDialog(){

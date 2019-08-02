@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private ViewDialog viewDialog;
     private DatabaseHelper_User databaseHelper_user;
     private boolean isLoggedin = false;
+    private String message;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,8 +89,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void checkLogin(final String username, final String password) {
-        viewDialog.showDialog();
         boolean isSuccess = checkLoginValidate(username, password);
+        viewDialog.showDialog();
         if (isSuccess) {
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -109,7 +110,6 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     viewDialog.hideDialog();
-                    String message = getString(R.string.login_error_message);
                     Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
                 }
             }, 1000);
@@ -161,13 +161,19 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         } catch (MalformedURLException e) {
+            message = "Can not connect server";
             e.printStackTrace();
+            return false;
         } catch (ProtocolException e) {
+            message = "Can not connect server";
             e.printStackTrace();
+            return false;
         } catch (IOException e) {
+            message = "Can not connect server";
             e.printStackTrace();
+            return false;
         }
-
+        message = getString(R.string.login_error_message);
         return false;
     }
 }

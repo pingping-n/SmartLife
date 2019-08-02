@@ -85,6 +85,12 @@ public class DatabaseHelper_Device_Data extends SQLiteOpenHelper {
 
     }
 
+    public void deleteDeviceData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME;
+        db.execSQL(query);
+    }
+
     /**
      * Delete from database
      */

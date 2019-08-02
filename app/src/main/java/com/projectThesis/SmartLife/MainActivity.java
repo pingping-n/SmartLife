@@ -6,14 +6,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.MenuItem;
 import android.content.Intent;
-import android.database.Cursor;
-import android.widget.Toolbar;
+
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-    private String username;
     private DatabaseHelper_Device_Data databaseHelper_device_data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

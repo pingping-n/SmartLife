@@ -1,5 +1,6 @@
 package com.projectThesis.SmartLife;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -7,8 +8,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class AddDeviceDetailActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
@@ -45,6 +48,12 @@ public class AddDeviceDetailActivity extends AppCompatActivity implements View.O
 
         add_device_end.setOnClickListener(this);
         editText_title.addTextChangedListener(this);
+
+        // hide keyboard when touch
+        RelativeLayout showListDeviceDetail;
+        showListDeviceDetail = (RelativeLayout)findViewById(R.id.show_list_device_detail);
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(showListDeviceDetail.getWindowToken(), 0);
 
     }
 

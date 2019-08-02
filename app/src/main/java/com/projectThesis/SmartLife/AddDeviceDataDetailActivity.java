@@ -1,12 +1,15 @@
 package com.projectThesis.SmartLife;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -75,6 +78,12 @@ public class AddDeviceDataDetailActivity extends AppCompatActivity implements Vi
         add_device_end.setText("Done");
         add_device_end.setOnClickListener(this);
         add_device_end.setEnabled(false);
+
+        // hide keyboard when touch
+        LinearLayout showListDevice;
+        showListDevice = (LinearLayout)findViewById(R.id.show_list_device);
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(showListDevice.getWindowToken(), 0);
 
 
     }

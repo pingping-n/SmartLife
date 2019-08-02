@@ -104,5 +104,11 @@ public class DatabaseHelper_Device extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
+    public void deleteDevice() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME;
+        db.execSQL(query);
+    }
+
 
 }

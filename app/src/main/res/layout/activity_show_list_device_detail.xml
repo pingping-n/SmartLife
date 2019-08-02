@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_custom"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/show_list_device_detail">
 
     <EditText android:id="@+id/input_title_addDevice"
         android:background="@drawable/textinput_custom"

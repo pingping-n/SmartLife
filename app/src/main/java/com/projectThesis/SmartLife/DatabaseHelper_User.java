@@ -45,11 +45,9 @@ public class DatabaseHelper_User extends SQLiteOpenHelper {
         }
     }
 
-    public void deleteUser(String username, String password) {
+    public void deleteUser() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "DELETE FROM " + TABLE_NAME + " WHERE "
-                + COL2 + " = '" + username + "'" +
-                " AND " + COL3 + " = '" + password + "'";
+        String query = "DELETE FROM " + TABLE_NAME;
         db.execSQL(query);
     }
 

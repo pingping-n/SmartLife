@@ -6,23 +6,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.content.Context;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoDatabase;
-
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -37,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private Context mContext;
     private ViewDialog viewDialog;
     private DatabaseHelper_User databaseHelper_user;
+    private boolean isLoggedin = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,9 +44,16 @@ public class LoginActivity extends AppCompatActivity {
         mPassword = (EditText) findViewById(R.id.input_password);
         mContext = this;
         viewDialog = new ViewDialog(this);
+        databaseHelper_user = new DatabaseHelper_User(this);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        // hide keyboard when touch
+        LinearLayout loginLayout;
+        loginLayout = (LinearLayout)findViewById(R.id.loginLayout);
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(loginLayout.getWindowToken(), 0);
 
     }
 
@@ -58,14 +61,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        databaseHelper_user = new DatabaseHelper_User(this);
         String usernameDB = databaseHelper_user.getUser();
         String passwordDB = databaseHelper_user.getPassword();
 
         if (!usernameDB.equals("") && !passwordDB.equals("")) {
-            viewDialog.showDialog();
+            isLoggedin = true;
+            System.out.println(">>>>>>>>>>>>>>>>" + databaseHelper_user.getUser() + " | " + databaseHelper_user.getPassword());
             checkLogin(usernameDB, passwordDB);
-            viewDialog.hideDialog();
         }
 
         mLogin.setOnClickListener(new View.OnClickListener() {
@@ -73,11 +75,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = mUsername.getText().toString().trim().toLowerCase();
                 String password = mPassword.getText().toString().trim();
-                viewDialog.showDialog();
                 checkLogin(username, password);
             }
         });
-
 
     }
 
@@ -96,10 +96,12 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     viewDialog.hideDialog();
-                    databaseHelper_user.addUser(username, password);
+                    if (!isLoggedin) {
+                        databaseHelper_user.addUser(username, password);
+                    }
                     passLogin();
                 }
-            }, 2000);
+            }, 1000);
 
         } else {
             Handler handler = new Handler();
@@ -110,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                     String message = getString(R.string.login_error_message);
                     Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
                 }
-            }, 2000);
+            }, 1000);
         }
     }
 

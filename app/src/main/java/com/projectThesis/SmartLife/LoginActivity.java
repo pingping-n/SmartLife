@@ -1,6 +1,7 @@
 package com.projectThesis.SmartLife;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.content.Context;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -66,13 +66,13 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!usernameDB.equals("") && !passwordDB.equals("")) {
             isLoggedin = true;
-            System.out.println(">>>>>>>>>>>>>>>>" + databaseHelper_user.getUser() + " | " + databaseHelper_user.getPassword());
             checkLogin(usernameDB, passwordDB);
         }
 
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isLoggedin = false;
                 String username = mUsername.getText().toString().trim().toLowerCase();
                 String password = mPassword.getText().toString().trim();
                 checkLogin(username, password);

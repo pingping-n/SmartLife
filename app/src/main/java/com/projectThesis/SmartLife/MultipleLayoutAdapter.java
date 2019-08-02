@@ -8,15 +8,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.app.infideap.stylishwidget.view.*;
-
-import org.w3c.dom.Text;
-
-import de.nitri.gauge.Gauge;
-import pl.pawelkleczkowski.customgauge.CustomGauge;
+import com.app.infideap.stylishwidget.view.AMeter;
+import com.app.infideap.stylishwidget.view.AProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.nitri.gauge.Gauge;
+import pl.pawelkleczkowski.customgauge.CustomGauge;
 
 public class MultipleLayoutAdapter extends BaseAdapter {
 

@@ -12,4 +12,5 @@
     <string name="image_view_item">image view item</string>
     <string name="next">NEXT</string>
     <string name="logout">logout</string>
+    <string name="input_name_iot">input name iot</string>
 </resources>

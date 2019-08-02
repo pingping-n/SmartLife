@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.String;
 
 public class AddDeviceDataDetailActivity extends AppCompatActivity implements View.OnClickListener{
 

@@ -106,7 +106,7 @@ public class ShowDataDevice extends AppCompatActivity {
             public void run() {
                 items = new ArrayList<>();
                 new setShowDataAPI().execute();
-                handler.postDelayed(this, 8000);
+                handler.postDelayed(this, 6000);
             }
         };
     }
